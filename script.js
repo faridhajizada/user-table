@@ -19,6 +19,10 @@ fetch("https://mocki.io/v1/f0b8306c-781b-45f1-9f88-0dc0a039f46f")
   .catch((error) => console.error("Error fetching data:", error));
 
 
+  let currentPage = 1;
+  const usersPerPage = 10;
+
+  
   function displayUsers(users, page) {
     const startIndex = (page - 1) * usersPerPage;
     const endIndex = startIndex + usersPerPage;
@@ -64,13 +68,9 @@ class Person {
   }
 
   calculateAge() {
-    let today = new Date();
-    let birthDate = new Date(this.birthdate);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    let month = today.getMonth() - birthDate.getMonth();
-    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
+    const currentYear = new Date().getFullYear();
+    const birthYear = this.birthdate.slice(0,4);
+    let age = currentYear - birthYear;
     return age;
   }
 }
@@ -78,8 +78,6 @@ class Person {
 class User extends Person {
   constructor(name, address, email, phone_number, birthdate, job, company) {
     super(name, address, email, phone_number, birthdate);
-    this.job = job;
-    this.company = company;
   }
 
   isRetired() {
@@ -101,8 +99,6 @@ searchInput.addEventListener("input", () => {
   updatePaginationInfo(filteredUsers.length);
 });
 
-let currentPage = 1;
-const usersPerPage = 10;
 
 
 document.getElementById("previous-button").addEventListener("click", () => {
