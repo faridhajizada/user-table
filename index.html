@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Management</title>
-    <meta author="Farid Hajizada">
+    <meta author="Farid Hajizada" />
     <style>
       table {
         width: 100%;
@@ -12,7 +12,7 @@
       }
       th,
       td {
-        padding: 8px;
+        padding: 2px;
         text-align: left;
         border: 1px solid #ddd;
         font-size: 8px;
@@ -55,6 +55,84 @@
         background-color: white;
         color: red;
       }
+      #add-button {
+        width: 100%;
+        background-color: blue;
+        color: white;
+        border-radius: 8px;
+        border: none;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+        border: 1px solid black;
+      }
+      #add-button:hover {
+        border: 1px solid black;
+        background-color: white;
+        color: blue;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 60px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 15%;
+        text-align: center;
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .editBtn {
+        background-color: green;
+        color: white;
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 20px;
+        border: 1px solid black;
+      }
+
+      .editBtn:hover {
+        border: 1px solid black;
+        background-color: white;
+        color: green;
+      }
+
+      .deleteBtn {
+        background-color: red;
+        color: white;
+        border-radius: 8px;
+        border: none;
+        margin-bottom: 20px;
+        border: 1px solid black;
+      }
+
+      .deleteBtn:hover {
+        border: 1px solid black;
+        background-color: white;
+        color: red;
+      }
     </style>
   </head>
   <body>
@@ -63,6 +141,7 @@
       id="search-input"
       placeholder="Search by name or email"
     />
+    <button id="add-button">Add User</button>
     <table>
       <thead>
         <tr>
@@ -74,16 +153,47 @@
           <th>Company</th>
           <th>Age</th>
           <th>Retired</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody id="user-table-body"></tbody>
-      <!-- Data will be populated here -->
     </table>
     <div id="pagination-controls">
       <button id="previous-button">Previous</button>
       <span id="pagination-info">Page 1 of N</span>
       <button id="next-button">Next</button>
     </div>
+
+    <div id="user-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modal-title">Add User</h2>
+        <form id="user-form">
+          <input type="hidden" id="user-id" />
+          <label for="name">Name:</label><br />
+          <input type="text" id="name" name="name" required /><br />
+          <label for="address">Address:</label><br />
+          <input type="text" id="address" name="address" required /><br />
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" required /><br />
+          <label for="phone_number">Phone Number:</label><br />
+          <input
+            type="text"
+            id="phone_number"
+            name="phone_number"
+            required
+          /><br />
+          <label for="birthdate">Birthdate:</label><br />
+          <input type="date" id="birthdate" name="birthdate" required /><br />
+          <label for="job">Job:</label><br />
+          <input type="text" id="job" name="job" required /><br />
+          <label for="company">Company:</label><br />
+          <input type="text" id="company" name="company" required /><br /><br />
+          <input type="submit" value="Save" />
+        </form>
+      </div>
+    </div>
+
     <script src="./script.js"></script>
   </body>
 </html>
